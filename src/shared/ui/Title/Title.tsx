@@ -16,7 +16,7 @@ interface TitleProps {
   as?: ElementType
 }
 
-export const Title = ({ children, className = '', size = TitleSize.M, as: Tag = 'h1'}: TitleProps) => {
+export const Title = ({ children, className = '', size = TitleSize.M, as: Tag = 'h2'}: TitleProps) => {
   const additionalClasses = [
     className,
     style[size],
