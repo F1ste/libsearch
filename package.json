@@ -1,15 +1,19 @@
 {
+  "homepage": "https://F1ste.github.io/libsearch/",
   "name": "libsearch",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "vite --open",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "gh-pages": "^6.1.1",
     "@reduxjs/toolkit": "^2.0.1",
     "@types/react-redux": "^7.1.33",
     "react": "^18.2.0",
