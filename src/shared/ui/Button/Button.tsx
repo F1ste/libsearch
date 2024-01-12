@@ -52,7 +52,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {isLoading &&
           <div className={style.button__loading}>
-            {loadingText ?? 'Отправка'} <Spinner />
+            {loadingText} <Spinner />
           </div>
         }
         <div className={classNames(style.button__content, { [style.isLoading]: !!isLoading }, [contentClassname])}>

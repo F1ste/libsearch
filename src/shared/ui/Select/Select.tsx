@@ -1,63 +1,31 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import { Dropdown } from "../Dropdown/Dropdown";
-import style from './Select.module.scss'
 import { SlArrowDown } from "react-icons/sl";
 import { classNames } from "src/shared/lib/classNames/classNames";
-import { IoClose } from "react-icons/io5";
-import { Button } from "../Button/Button";
 import { useToggleDropdown } from "src/shared/hooks/useToggleDropdown";
+import style from './Select.module.scss'
 
 interface OptionType {
     name: string
     value: string
 }
 
-interface CommonSelectProps {
+interface SelectProps {
     options: (string | OptionType)[]
     placeholder?: string
-}
-
-interface MultipleSelectProps {
-    multiple: true
-    value?: string[]
-    setValue: (value: string[]) => void
-}
-
-interface SingleSelectProps {
-    multiple?: false
     value?: string
     setValue: (value: string) => void
 }
 
-type SelectProps = CommonSelectProps & (MultipleSelectProps | SingleSelectProps)
-
 export const Select = (props: SelectProps) => {
-    const { multiple, placeholder, value, setValue, options } = props
+    const { placeholder, value, setValue, options } = props
 
-    const [, setIsFocused] = useState(false);
     const [isDropdownOpen, toggleDropdown] = useToggleDropdown();
-    const [availableOptions, setAvailableOptions] = useState(options);
     const elementRef = useRef<HTMLDivElement>(null)
 
     const isOptionStringArray = (options: (string | OptionType)[]): options is string[] => {
         return !!(options?.length && typeof options[0] === 'string')
     }
-
-    const addValue = useCallback((selectValue: string) => () => {
-        if (multiple) {
-            setValue([...(value ?? []), selectValue]);
-            toggleDropdown();
-            return;
-        }
-
-        setValue(selectValue);
-    }, [value])
-
-    const deleteValue = useCallback((selectValue: string) => () => {
-        if (multiple) {
-            setValue(value?.filter(item => item !== selectValue) ?? [])
-        }
-    }, [value])
 
     const valueToShow = (value: string) => {
         if (isOptionStringArray(options)) {
@@ -67,25 +35,10 @@ export const Select = (props: SelectProps) => {
         return (options.find(item => (item as OptionType).value === value) as OptionType)?.name || ''
     }
 
-    useEffect(() => {
-        if (multiple) {
-            const stringOptions = isOptionStringArray(options) ? options : options.map(option => (option as OptionType).value);
-            const newOptions = stringOptions.filter(option => !(value?.includes(option) ?? true));
-            setAvailableOptions(
-                isOptionStringArray(options)
-                    ? newOptions
-                    : newOptions.map(option => options.find(item => (item as OptionType).value === option)!)
-            )
-        }
-    }, [value])
-
     return (
         <div className={style.select}>
             <div
                 className={style.select__toggler}
-                tabIndex={0}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
                 ref={elementRef}
                 onClick={toggleDropdown}
             >
@@ -93,15 +46,8 @@ export const Select = (props: SelectProps) => {
                     className={classNames(style.select__arrowDown, { [style.rotated]: isDropdownOpen })}
                     color="#9B9B9B"
                 />
-                {!multiple && (valueToShow(value ?? '') || placeholder)}
-                {multiple && (value?.length ?
-                    (value.map((item) => (
-                        <div key={item} className={style.select__valueItem} onClick={e => e.stopPropagation()}>
-                            {valueToShow(item)}
-                            <Button onClick={deleteValue(item)}><IoClose /></Button>
-                        </div>
-                    )))
-                    : placeholder)}
+                {(valueToShow(value ?? '') || placeholder)}
+
                 <Dropdown
                     isOpen={isDropdownOpen}
                     onClose={toggleDropdown}
@@ -110,14 +56,14 @@ export const Select = (props: SelectProps) => {
                     width="100%"
                     className={style.select__dropdown}
                 >
-                    {availableOptions?.length
-                        ? availableOptions.map((option) => {
+                    {options?.length
+                        ? options.map((option) => {
                             if (typeof option === "string") {
                                 return (
                                     <div
                                         key={option}
                                         className={classNames(style.select__item, { [style.selected]: option === value })}
-                                        onClick={addValue(option)}
+                                        onClick={() => setValue(option)}
                                     >
                                         {option}
                                     </div>
@@ -127,7 +73,7 @@ export const Select = (props: SelectProps) => {
                                 <div
                                     key={option.name}
                                     className={classNames(style.select__item, { [style.selected]: option.value === value })}
-                                    onClick={addValue(option.value)}
+                                    onClick={() => setValue(option.value)}
                                 >
                                     {option.name}
                                 </div>

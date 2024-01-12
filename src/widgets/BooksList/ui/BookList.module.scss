@@ -1,0 +1,34 @@
+.bookList {
+
+    &:last-child{
+        margin-bottom: 32px;
+    }
+
+    &__grid {
+        margin: 32px 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 239px);
+        justify-content: center;
+        gap: 24px;
+
+    }
+
+    &__foundedBooks {
+        text-align: center;
+        font-size: 32px;
+        margin-top: 32px;
+        font-weight: 700;
+    }
+
+    &__spinner {
+        margin-top: 32px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    &__showMore{
+        display: grid;
+        place-content: center;
+    }
+}

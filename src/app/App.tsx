@@ -1,11 +1,11 @@
-import { AppRouter } from './router'
+import MainPage from 'src/pages/MainPage'
 import './styles/global.scss'
 
 function App() {
 
   return (
       <div className='app'>
-        <AppRouter />
+        <MainPage />
       </div>
   )
 }

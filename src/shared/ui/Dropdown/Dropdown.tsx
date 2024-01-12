@@ -2,6 +2,7 @@ import { classNames } from 'src/shared/lib/classNames/classNames';
 import style from './Dropdown.module.scss'
 import { PropsWithChildren, RefObject, useLayoutEffect, useRef, useState } from 'react';
 import { useDocumentEvent } from 'src/shared/hooks/useDocumentEvent';
+import { useOutsideClick } from 'src/shared/hooks/useOutsideClick';
 
 interface SelectDropdownProps {
   targetRef: RefObject<HTMLElement>
@@ -51,6 +52,7 @@ export const Dropdown = (props: PropsWithChildren<SelectDropdownProps>) => {
   };
 
   useDocumentEvent('keydown', closeOnEsc, isOpen);
+  useOutsideClick({elementRef: dropdownRef, triggerRef: targetRef, onOutsideClick: onClose})
 
   if (!isOpen) return null
 
