@@ -1,0 +1,18 @@
+.searchInput {
+  width: 100%;
+  max-width: 550px;
+  position: relative;
+  height: 57px;
+
+  &__button{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-52%);
+    right: 20px;
+  }
+
+  &__textField {
+    padding: 18px 20px;
+    padding-right: 54px;
+  }
+}
