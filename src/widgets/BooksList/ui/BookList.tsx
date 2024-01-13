@@ -10,7 +10,7 @@ import { Container } from 'src/shared/ui/Container/Container'
 export const BookList = () => {
     const { query, category, orderBy, page } = useAppSelector((state: RootState) => state.booksReducer);
     const searchResultsLimit = 30;
-    const { data: books, isFetching, isError } = bookAPI.useFetchBooksQuery({
+    const { data: books, isFetching, isError, isSuccess } = bookAPI.useFetchBooksQuery({
         limit: searchResultsLimit,
         query: query,
         category: category,
@@ -27,7 +27,7 @@ export const BookList = () => {
     };
 
     const showTitleText = (): string => {
-        if (isFetching) {
+        if (isFetching && !isSuccess ) {
             return 'Поиск...'
         }
 

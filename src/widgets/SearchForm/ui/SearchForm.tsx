@@ -3,16 +3,18 @@ import { Title, TitleSize } from "src/shared/ui/Title/Title"
 import { SearchInput } from "src/features/SearchInput"
 import { setCategory, setOrderBy, setQuery, setPage } from "src/entities/Book/reducers/bookSliсe"
 import { FormEvent, useState } from "react"
-import { useAppDispatch } from "src/shared/hooks/redux"
+import { useAppDispatch, useAppSelector } from "src/shared/hooks/redux"
 import { Select } from "src/shared/ui/Select/Select"
 import style from './SearchForm.module.scss'
 import { bookAPI } from "src/entities/Book/api/api"
 
 
 export const SearchForm = () => {
-    const [serchQuery, setSerchQuery] = useState('');
-    const [selectCategory, setSelectCategory] = useState('');
-    const [selectOrderBy, setSelectOrderBy] = useState('relevance');
+    const { category, orderBy, query } = useAppSelector((state) => state.booksReducer)
+    
+    const [serchQuery, setSerchQuery] = useState(query);
+    const [selectCategory, setSelectCategory] = useState(category);
+    const [selectOrderBy, setSelectOrderBy] = useState(orderBy);
 
     const dispatch = useAppDispatch();
     const onHandleQuery = (e: FormEvent<HTMLFormElement>) => {

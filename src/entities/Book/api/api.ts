@@ -40,5 +40,10 @@ export const bookAPI = createApi({
                 return currentArg !== previousArg
             },
         }),
+        fetchSingleBook: build.query<IBook, string>({
+            query: (bookId) => ({
+                url: `/books/v1/volumes/${bookId}`
+            })
+        })
     })
 })

@@ -1,0 +1,9 @@
+.singleBookPage{
+  display: flex;
+  flex-direction: column;
+
+  &__back{
+    margin-top: 32px;
+    align-self: flex-start;
+  }
+}

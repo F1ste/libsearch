@@ -6,6 +6,23 @@
     padding: 5px;
     border-radius: 10px;
     min-height: 330px;
+    transition: transform .3s ease-in-out;
+
+    @media (any-hover: hover) {
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &__skeleton {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background-color: #ececec;
+        padding: 5px;
+        border-radius: 10px;
+        min-height: 330px;
+    }
 
     &__mediaBlock {
         width: 130px;
@@ -25,7 +42,7 @@
         object-fit: cover;
     }
 
-    &__blankImage{
+    &__blankImage {
         width: 70px;
         height: 70px;
     }
@@ -34,7 +51,7 @@
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 2;
-                line-clamp: 2; 
+        line-clamp: 2;
         -webkit-box-orient: vertical;
     }
 }

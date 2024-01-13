@@ -1,0 +1,1 @@
+export { BookDetailed } from './ui/BookDetailed'

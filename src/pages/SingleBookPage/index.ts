@@ -1,0 +1,1 @@
+export { SingleBookPage } from './ui/SingleBookPage'
