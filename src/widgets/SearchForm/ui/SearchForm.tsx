@@ -37,7 +37,7 @@ export const SearchForm = () => {
     };
 
     return (
-        <Container>
+        <Container className={style.searchForm}>
             <Title className={style.searchForm__title} size={TitleSize.L} as={'h1'}>Поиск книг</Title>
             <div className={style.searchForm__form}>
                 <SearchInput

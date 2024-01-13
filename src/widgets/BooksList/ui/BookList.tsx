@@ -5,6 +5,7 @@ import { RootState } from "src/app/store/store"
 import { setPageIncrement } from "src/entities/Book/reducers/bookSliсe"
 import { ShowMoreButton } from "src/features/ShowMoreButton"
 import { BooksGrid } from './BooksGrid'
+import { Container } from 'src/shared/ui/Container/Container'
 
 export const BookList = () => {
     const { query, category, orderBy, page } = useAppSelector((state: RootState) => state.booksReducer);
@@ -46,7 +47,7 @@ export const BookList = () => {
     }
 
     return (
-        <div className={style.bookList}>
+        <Container className={style.bookList}>
 
             <div className={style.bookList__foundedBooks}>{showTitleText()}</div>
 
@@ -65,6 +66,6 @@ export const BookList = () => {
                 </div>
             }
 
-        </div >
+        </Container >
     )
 }
