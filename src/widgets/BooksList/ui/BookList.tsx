@@ -6,10 +6,14 @@ import { setPageIncrement } from "src/entities/Book/reducers/bookSliсe"
 import { ShowMoreButton } from "src/features/ShowMoreButton"
 import { BooksGrid } from './BooksGrid'
 import { Container } from 'src/shared/ui/Container/Container'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export const BookList = () => {
     const { query, category, orderBy, page } = useAppSelector((state: RootState) => state.booksReducer);
     const searchResultsLimit = 30;
+    const { state } = useLocation();
+    
     const { data: books, isFetching, isError, isSuccess } = bookAPI.useFetchBooksQuery({
         limit: searchResultsLimit,
         query: query,
@@ -27,7 +31,7 @@ export const BookList = () => {
     };
 
     const showTitleText = (): string => {
-        if (isFetching && !isSuccess ) {
+        if (isFetching && !isSuccess) {
             return 'Поиск...'
         }
 
@@ -45,6 +49,12 @@ export const BookList = () => {
 
         return 'Введите название книги'
     }
+
+    useEffect(() => {
+        if (state?.scrollPos) {
+            document.querySelector(`#${state.scrollPos}`)?.scrollIntoView()
+        }
+    }, [state])
 
     return (
         <Container className={style.bookList}>

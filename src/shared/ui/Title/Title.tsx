@@ -1,6 +1,6 @@
 import { classNames } from '../../lib/classNames/classNames'
 import style from './Title.module.scss'
-import { ElementType, ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 export enum TitleSize {
   S = 'size_s',
@@ -13,10 +13,10 @@ interface TitleProps {
   size?: TitleSize
   className?: string
   children?: ReactNode
-  as?: ElementType
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 }
 
-export const Title = ({ children, className = '', size = TitleSize.M, as: Tag = 'h2'}: TitleProps) => {
+export const Title = ({ children, className = '', size = TitleSize.M, as: Tag = 'h2' }: TitleProps) => {
   const additionalClasses = [
     className,
     style[size],

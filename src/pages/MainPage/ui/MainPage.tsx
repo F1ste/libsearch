@@ -6,7 +6,6 @@ import { SearchForm } from 'src/widgets/SearchForm'
 export type FormValue = string | string[]
 
 export const MainPage = () => {
-
     return (
         <div className={style.mainPage}>
             <div className={style.mainPage__searchBlock}>

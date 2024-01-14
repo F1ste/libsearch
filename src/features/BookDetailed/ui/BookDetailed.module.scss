@@ -55,4 +55,13 @@
     padding: 10px;
     border-radius: 10px;
   }
+  
+  &__error{
+    margin-top: 32px;
+    justify-content: center;
+  }
+
+  &__description ul {
+    padding-left: 15px;
+  }
 }

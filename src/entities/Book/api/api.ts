@@ -30,6 +30,7 @@ export const bookAPI = createApi({
                     _orderBy: orderBy,
                 }
             }),
+            providesTags: ['book'],
             serializeQueryArgs: ({ endpointName}) => {
                 return endpointName;
             },
@@ -37,7 +38,7 @@ export const bookAPI = createApi({
                 currentCache.items?.push(...(newItems.items ?? []))
             },
             forceRefetch({ currentArg, previousArg }) {
-                return currentArg !== previousArg
+                return currentArg?.page !== previousArg?.page
             },
         }),
         fetchSingleBook: build.query<IBook, string>({
