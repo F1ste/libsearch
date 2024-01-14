@@ -6,7 +6,7 @@ export const BackButton = () => {
     const { state } = useLocation()
     
     const onClick = () => {
-        navigate('/', { state })
+        navigate('/libsearch', { state })
     }
     return (
         <Button
